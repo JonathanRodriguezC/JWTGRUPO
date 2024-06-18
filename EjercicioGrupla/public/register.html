@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+
+<body>
+    <form id="registerForm">
+
+        <input type="text" id="regName" placeholder="Nombre" required>
+        <input type="text" id="regApellido" placeholder="Apellido" required>
+        <input type="email" id="regCorreo" placeholder="ingrese su correo" required>
+        <input type="text" id="regUsername" placeholder="Usuario" required>
+        <input type="password" id="regPassword" placeholder="Contraseña" required>
+        <button type="submit">Registrar</button>
+    </form>
+    <a href="/auth/login">Iniciar Sesión</a>
+</body>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('regName').value;
+        const lastname = document.getElementById('regApellido').value;
+        const correo = document.getElementById('regCorreo').value;
+        const username = document.getElementById('regUsername').value;
+        const password = document.getElementById('regPassword').value;
+        const response = await fetch('/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, lastname, correo, username, password })
+        });
+        if (response.ok) {
+            alert('Registro Exitoso!');
+        } else {
+            const result = await response.json();
+            alert(result.message);
+        }
+    });
+</script>
+
+</html>
