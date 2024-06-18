@@ -4,20 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register</title>
+    <title>Registrar usuarios</title>
+    <style>
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif; }
+        .contenedor { display: block; }
+        .box { display: flex; justify-content: space-between; }
+        .box img { width: 50px; height: 35px; }
+        .navbar{ display: flex; justify-content: center; gap: 20px; }
+        .navbar a { color: cornflowerblue; font-weight: bold; text-decoration: none; font-size: 20px; }
+    </style>
 </head>
 
 <body>
-    <form id="registerForm">
-
-        <input type="text" id="regName" placeholder="Nombre" required>
-        <input type="text" id="regApellido" placeholder="Apellido" required>
-        <input type="email" id="regCorreo" placeholder="ingrese su correo" required>
-        <input type="text" id="regUsername" placeholder="Usuario" required>
-        <input type="password" id="regPassword" placeholder="Contraseña" required>
-        <button type="submit">Registrar</button>
-    </form>
-    <a href="/auth/login">Iniciar Sesión</a>
+    <main class="contenedor">
+        <section class="box">
+            <img src="" alt="" srcset="">
+            <nav class="navbar">
+                <a href="/auth/login">Ingresar</a>
+                <a href="/auth/login">Registrar</a>
+            </nav>
+        </section>
+        <section>
+            <h1>Registrar usuarios</h1>
+            <h4>Este es el apartado para </h4>
+            <form id="registerForm">
+                <input type="text" id="regName" placeholder="Nombre" required>
+                <input type="text" id="regApellido" placeholder="Apellido" required>
+                <input type="email" id="regCorreo" placeholder="ingrese su correo" required>
+                <input type="text" id="regUsername" placeholder="Usuario" required>
+                <input type="password" id="regPassword" placeholder="Contraseña" required>
+                <button type="submit">Registrar</button>
+            </form>
+        </section>
+    </main>
 </body>
 <script>
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
