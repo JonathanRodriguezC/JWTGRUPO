@@ -18,6 +18,7 @@ router.post('/register', authController.register);
 router.get('/forgot', (req, res) => {
     res.sendFile('forgot.html', { root: 'public' });
 })
+
 router.post('/forgot', authController.forgotPassword);
 //router.post('/reset/:token', authController.resetPassword);
 module.exports = router;
