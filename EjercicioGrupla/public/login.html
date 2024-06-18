@@ -4,15 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .contenedor {
+            display: block;
+        }
+
+        .box {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box img {
+            width: 50px;
+            height: 35px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: cornflowerblue;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        input {
+            padding: 4px;
+        }
+
+        button {
+            padding: 8px;
+            background-color: cornflowerblue;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <form id="loginForm">
-        <input type="text" name="username" placeholder="Usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit">Iniciar Sesión</button>
-    </form>
-    <a href="/auth/register">Registrar</a>
+    <main class="contenedor">
+        <section class="box">
+            <img src="/devto-light.svg" alt="" srcset="">
+            <nav class="navbar">
+                <a href="/auth/login">Ingresar</a>
+                <a href="/auth/register">Registrar</a>
+                <a href="/auth/forgot">recuperar contraseña</a>
+            </nav>
+        </section>
+        <section>
+            <h1>Ingreso de usuarios</h1>
+            <h4>Este es el apartado para ingresar credenciales</h4>
+            <form id="loginForm">
+                <input type="text" name="username" placeholder="Usuario" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </section>
+    </main>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', async function (event) {

@@ -5,12 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .contenedor {
+            display: block;
+        }
+
+        .box {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box img {
+            width: 50px;
+            height: 35px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: cornflowerblue;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>inicio</h1>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/register">register</a>
+    <main class="contenedor">
+        <section class="box">
+            <img src="./devto-light.svg" alt="" srcset="">
+            <nav class="navbar">
+                <a href="/auth/login">Ingresar</a>
+                <a href="/auth/register">Registrar</a>
+            </nav>
+        </section>
+        <section>
+            <h1>Home</h1>
+            <h4>Este es el home del web app</h4>
+        </section>
+    </main>
 </body>
 
 </html>

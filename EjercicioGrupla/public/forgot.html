@@ -4,14 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Recuperar Contraseña</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .contenedor {
+            display: block;
+        }
+
+        .box {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box img {
+            width: 50px;
+            height: 35px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: cornflowerblue;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <form id="forgotForm">
-        <label for="correo"></label>
-        <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" required>
-        <button type="submit">Enviar Correo de Recuperación</button>
-    </form>
+    <main class="contenedor">
+        <section class="box">
+            <img src="/devto-light.svg" alt="" srcset="">
+            <nav class="navbar">
+                <a href="/auth/login">Ingresar</a>
+                <a href="/auth/register">Registrar</a>
+            </nav>
+        </section>
+        <section>
+            <h1>Recuperar Contraseña</h1>
+            <h4>Este es el apartado para recuperar la Contraseña</h4>
+            <form id="forgotForm">
+                <label for="correo"></label>
+                <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" required>
+                <button type="submit">Enviar Correo de Recuperación</button>
+            </form>
+        </section>
+    </main>
 
     <script>
         document.getElementById('forgotForm').addEventListener('submit', async function (event) {
