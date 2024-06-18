@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar Contraseña</title>
+</head>
+
+<body>
+    <form id="forgotForm">
+        <label for="correo"></label>
+        <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" required>
+        <button type="submit">Enviar Correo de Recuperación</button>
+    </form>
+
+    <script>
+        document.getElementById('forgotForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const correo = document.getElementById("correo").value
+            alert(correo)
+
+
+
+            try {
+                const response = await fetch('/auth/forgot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ correo })
+                });
+
+                const result = await response.json();
+                alert(result.message);
+            } catch (error) {
+                alert('Error al enviar correo de recuperación');
+            }
+        });
+    </script>
+</body>
+
+</html>

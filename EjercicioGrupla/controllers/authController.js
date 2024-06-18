@@ -1,6 +1,9 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const cookieParser = require('cookie-parser')
+const nodemailer = require('nodemailer');
+const { text } = require('body-parser');
 
 
 exports.register = async (req, res) => {
@@ -49,3 +52,45 @@ exports.login = async (req, res) => {
         res.status(400).send('Error al iniciar sesión');
     }
 };
+
+
+exports.forgotPassword = async (req, res) => {
+    const { correo } = req.body;
+    try {
+        const user = await User.findOne({ correo })
+        if (!user) {
+            res.status(400).json({ message: "correo no encontrado" })
+
+        }
+        const token = jwt.sign({ id: user._id, username: user.username }, process.env.SECRET_KEY, { expiresIn: '7m' });
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 7 * 60 * 1000;
+        await user.save();
+        console.log(process.env.S_EMAIL)
+        console.log(user.correo)
+
+        const transporter = nodemailer.createTransport({
+            host: "smtp.office365.com",
+            port: 587,
+            secure: false,
+            auth: {
+                user: process.env.S_EMAIL,
+                pass: process.env.S_PWD
+            }
+
+        })
+
+
+        const mailOptions = {
+            to: user.correo,
+            from: process.env.S_EMAIL,
+            subject: 'Recuperación de Contraseña',
+            text: `Haz clic en el siguiente enlace para recuperar tu contraseña: http://localhost:3000/auth/reset/${token}`
+        };
+
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: "correo de recuperacion enviado" })
+    } catch (err) {
+        res.status(200).json({ message: "correo de recuperacion enviado" })
+    }
+}
