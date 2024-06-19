@@ -63,9 +63,8 @@ exports.forgotPassword = async (req, res) => {
 
         }
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.SECRET_KEY, { expiresIn: '7m' });
-        user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 7 * 60 * 1000;
-        await user.save();
+
+
         console.log(process.env.S_EMAIL)
         console.log(user.correo)
 
@@ -94,3 +93,34 @@ exports.forgotPassword = async (req, res) => {
         res.status(200).json({ message: "correo de recuperacion enviado" })
     }
 }
+
+exports.resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    try {
+        jwt.verify(token, process.env.SECRET_KEY, async (err, decoded) => {
+            if (err) {
+                console.log("acceso denegado")
+                return res.status(400).json({ message: "Token agotado" });
+            }
+            console.log("si hay token")
+
+            const user = await User.findOne({ _id: decoded.id });
+
+            if (!user) {
+                return res.status(400).json({ message: 'El token de recuperación es inválido o ha expirado' });
+            }
+
+            user.password = newPassword
+
+            console.log(user)
+            await user.save();
+
+            res.status(200).json({ message: 'Contraseña actualizada exitosamente' });
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error al restablecer la contraseña' });
+    }
+};
